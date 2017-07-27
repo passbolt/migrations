@@ -20,7 +20,6 @@ use Migrations\Migrations;
 use Migrations\MigrationsDispatcher;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * SeedTest class
@@ -187,7 +186,7 @@ class SeedTest extends TestCase
         ]);
 
         $display = $this->getDisplayFromOutput();
-        $this->assertEmpty($display);
+        $this->assertTextNotContains('seeded', $display);
         $migrations->rollback(['target' => 0]);
     }
 
@@ -239,7 +238,7 @@ class SeedTest extends TestCase
         $manager = new CakeManager($this->command->getConfig(), $input, $this->streamOutput);
         $manager->getEnvironment('default')->getAdapter()->setConnection($this->Connection->driver()->connection());
         $this->command->setManager($manager);
-        $commandTester = new CommandTester($this->command);
+        $commandTester = new \Migrations\Test\CommandTester($this->command);
 
         return $commandTester;
     }
@@ -276,7 +275,7 @@ class SeedTest extends TestCase
     }
 
     /**
-     * Extract the content that was stored in self::$streamOutput.
+     * Extract the content that was stored in self::$output.
      *
      * @return string
      */

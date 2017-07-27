@@ -168,7 +168,7 @@ class DumpTest extends TestCase
         $manager = new CakeManager($this->command->getConfig(), $input, $this->streamOutput);
         $manager->getEnvironment('default')->getAdapter()->setConnection($this->Connection->driver()->connection());
         $this->command->setManager($manager);
-        $commandTester = new CommandTester($this->command);
+        $commandTester = new \Migrations\Test\CommandTester($this->command);
 
         return $commandTester;
     }

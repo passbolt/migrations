@@ -157,7 +157,7 @@ class MarkMigratedTest extends TestCase
         $application = new MigrationsDispatcher('testing');
         $buggyCommand = $application->find('mark_migrated');
         $buggyCommand->setManager($manager);
-        $buggyCommandTester = new CommandTester($buggyCommand);
+        $buggyCommandTester = new \Migrations\Test\CommandTester($buggyCommand);
         $buggyCommandTester->execute([
             'command' => $this->command->getName(),
             '--connection' => 'test',
