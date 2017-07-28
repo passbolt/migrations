@@ -51,6 +51,8 @@ class MigrationsTest extends TestCase
             'source' => 'TestsMigrations'
         ];
 
+        unlink('cakephp_test');
+
         // Get the PDO connection to have the same across the various objects needed to run the tests
         $migrations = new Migrations();
         $input = $migrations->getInput('Migrate', [], $params);
