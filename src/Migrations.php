@@ -237,7 +237,7 @@ class Migrations
         $migrationPaths = $this->getConfig()->getMigrationPaths();
         $params = [
             array_pop($migrationPaths),
-            $this->getManager()->getVersionsToMark($input),
+            $this->getManager($this->getConfig())->getVersionsToMark($input),
             $this->output
         ];
 
